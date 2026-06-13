@@ -1,0 +1,140 @@
+
+
+Food page 
+
+
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .active-chip { background-color: #e50914; color: white; border-color: #e50914; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #333535; border-radius: 10px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#1a1c1c",
+                        "background": "#121414",
+                        "primary-container": "#e50914",
+                        "primary": "#ffb4aa",
+                        "on-surface": "#e2e2e2",
+                        "on-surface-variant": "#e9bcb6",
+                        "outline-variant": "#5e3f3b",
+                        "surface-variant": "#333535"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "price-tag": ["Inter"],
+                        "title-md": ["Montserrat"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "price-tag": ["18px", {"lineHeight": "1", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-lg antialiased selection:bg-primary-container selection:text-white">
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-6 md:px-8 py-4">
+<h1 class="font-display-lg text-2xl md:text-3xl tracking-tighter text-primary-container">CINEPLEX</h1>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 font-label-caps text-[12px]">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Movies</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Food</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Admin</a>
+</nav>
+<a class="bg-surface-variant/20 hover:bg-surface-variant px-4 py-2 rounded-full font-label-caps text-[12px] transition-all active:scale-95" href="#">Skip</a>
+</div>
+</header>
+<main class="pt-24 pb-32 max-w-7xl mx-auto px-4 md:px-8">
+<div class="mb-8 p-4 glass-card rounded-xl flex items-center gap-4 border-l-4 border-primary-container">
+<span class="material-symbols-outlined text-primary-container text-3xl">info</span>
+<div>
+<p class="font-bold text-on-surface">Interval Service Only</p>
+<p class="text-sm text-on-surface-variant">Food service provided only in Interval breaks. No extra charge for service.</p>
+</div>
+</div>
+<section class="mb-12">
+<h2 class="font-headline-lg text-headline-lg mb-6">Snacks &amp; Drinks</h2>
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<button class="active-chip border border-white/10 px-6 py-3 rounded-full flex items-center gap-2 font-label-caps text-[12px] shrink-0">
+<span class="material-symbols-outlined text-sm">fastfood</span> All Foods
+                </button>
+<button class="glass-card hover:bg-white/10 border border-white/10 px-6 py-3 rounded-full flex items-center gap-2 font-label-caps text-[12px] shrink-0">
+<span class="material-symbols-outlined text-sm">set_meal</span> Adults Food
+                </button>
+<button class="glass-card hover:bg-white/10 border border-white/10 px-6 py-3 rounded-full flex items-center gap-2 font-label-caps text-[12px] shrink-0">
+<span class="material-symbols-outlined text-sm">icecream</span> Kids Healthy Foods
+                </button>
+</div>
+</section>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+<script>
+                const items = [
+                    { name: 'Truffle Butter Popcorn', price: 450, img: 'https://images.unsplash.com/photo-1572177215152-32f247303126?auto=format&fit=crop&q=80&w=400', cat: 'Adult' },
+                    { name: 'Classic Salted', price: 250, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDU-7Ro7TBjFlxZVFmfDnL70NuwEwFv-Xkcahvc4z2W7EYK-gcRjR0m0_lQCAlXMoQC3XyiFt3SOXO0PW7BncKTR_1EA0URD6jQRa4JtJ0zkVKsB6TI2lMS-4FpW8wDmWm1WvswpocawVVoG8Tb1LX_E3GsgyRfjVsGKj3Y4lJzwnQLZ2QarbE0vBBqTXRPuiUYqmfulIaqsImYnz0AuOqayN87nXseIyan2XC0mdzX8v9Q66up7lnSQhSdCYd_6RaIJGvqp9ycEco', cat: 'All' },
+                    { name: 'Caramel Glaze', price: 320, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCbJ0_ST_M0Gei6t99TD-QoWn5wjFUw9L3GZjbJiSIR88-ZBrTQXnlMrxxyE9IXqzREESUkXSesD70n1KzifT21US8de67azOUv-zvslRUDc35dyeVzCA2qMfiPNdKw2T8KIk2fG4plZLoGj3KepuWBUq-49yNPc9KjNSU6vuR0-oSgisTE5jh9B3lg43mt5bz-Gnl5XslnBqV6lxSKXMzhAz7f5frvf-gkefY1GMWSYSsJei3cSXYkxBcaHJOcxwE5EdjL3y2wV-8', cat: 'All' },
+                    { name: 'Loaded Nachos', price: 480, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBp4mt8q0DZOGjg1jm5ZgemUy2yic_hwMTnXve0bPDyJqOZQYzKmBUqeQQF5E9xcMIG7SADX6eklY2MG_hbeIoXDE7p4jsh83jz2WXca3j-5Qzxnq8HdyjEHc_2a-kzWwu_J9W92qHhQyrLeNx-yCmZkPf1QIj8GBfwUhy47p4ZsUnT1bon8RWD2likMLsL6fyz47e5MFVX9gv5AYTt72v9Z0BUMn-3IBC-bbCqlB34fEUq2_MFtuAbiRhGDzTQjybYFBUSZ8GDA64', cat: 'Adult' },
+                    { name: 'Chicken Sliders', price: 550, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCcngB4wPkkOmv8X5yQF4Bzv39sCD-J4aG5rOTb36cOCtcnUPbp0eX5zSVg0l4_cqGxxyDn6iGUcYHQyqZIM0H5NscXAgxGq2RxV5t4Sz3g5K3H_4RmPHcltvKIlAgcS1pRxYE5BXO6UAQqGQc5USYfhcLfYQ0FL81tN_X2imjjbDUPlSYWKMrTczUlUNlU7WDdcpiQ1rOS-bkKjSN7TqfA1_gEHAFKa3VFVG9PUV3l3_DJepOlpra-TTz8RAPtZbtdS_nTWD9Z8_g', cat: 'Adult' },
+                    { name: 'Veggie Wrap', price: 380, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9KstCLilixbe_lsfIage8hYXVO6Euan0ofUm1jYAxCTdJ7EZlwF8YSTxnEtUQGZ-Vmpe22WrX2AQG2-ZLFfpbD4vdQWo-HIjdC-XT4AOzRIWLwsJBCbnCJ-JZRG1OFKZzq4uuwFrmGJUJl0-OupLO1l-Mp3yPXx7X8Kg7cvOaenErMQc56B4vlNMYsEKsrGvZzTyg6_N7FGzeHMrMNR_dOpBO1bZNh0YqZQznx32x8s1mVvf-hnJurm8QNrjbvdMoZG9rw7L50eg', cat: 'Healthy' },
+                    { name: 'Fruit Medley Cup', price: 220, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDd6Oa2__Ywiw8TVWXy2cJT3oepm6dQ-lK6aRWoC1IOWnYJfbsBIkM2oObBAPUhuUJG1fK6YpAR5pX5w_i3INuhosl6nntbo6luDVHPyPBmXL12H-UGtMw05YA647aER3rscVmpYEgOK2I_Pud4vzOftN--at7u4DSiNBS3qox0tMVh3qtf9XdtA2vGsF0l7vYJE41I7Ix9rYVk7WuLh2__ac2Ks9KDRDsEkNcuwrIVOIkStvRohHl1Wje-2kpSoTRNF39ZZqmZsTg', cat: 'Healthy' },
+                    { name: 'Organic Apple Juice', price: 180, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBjFLDn2Df_JKtAPd7xsj82M25LmdEN3NWwo1XISIl0QYIuz-VURzq7QDjOJLb2nBUR_CpJIMN_sUQHkDBNAAcxe8zgah9O2GNSATR_mWoB-6QXNIkKUUHvsKioRFN3vRPU-M3ydK9CHV05MQUwG1FZmus1_GiO09sbvaZGnQemVv7YbSmbM3ige2TgQ5nCL9y0OF2bnpor-ZVWWLV8_dCGdyfN79fhwPeEFs5o_ZXbmM8dS_lv9QBHFOSAgmGhhvVgR4ZbBQqAJhk', cat: 'Healthy' },
+                    { name: 'Peri Peri Popcorn', price: 290, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCzKtbkeVc4ctH46Pp2nmEiNSLwei9LAUR-jfeGDXwsLy0j2ksBe47CK_kFYOmtWYP5LgtbIROaBUvMDtzTpKO8llxhVlIlZz8q3djvRzjiTdJavOHAuiFQATfQ2MXe_VLjgoO4MIaE8k4U1sq3cEFUPifUvb37LS6xXK7svFbuhhabryN2oRLs3xjRnR0Av_kTzEmMrFqyyjt8go9JpRo1sMDopGZ4u_4w6Ztv4ORPoVQBqNt2kRGGW7NtqGTXEtB0VNotIyYdnI', cat: 'All' },
+                    { name: 'BBQ Pulled Pork Bun', price: 590, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCiDnByGwbhE4g020Cwyt2Kg7s_FjwQZ0uBqyYZprDDcJuQRwBMGqMzOcPwSjh_mWP2WgRYQUExbVgDDZSInmvuuz3ehjExacGjkwETy63koMLtE81o2WesHD8S-HvzYbNtUKcmc3vka46Xoz23imQ0aMFRCLGGKZOx_1wTX-mIC3XhtdNviOyHYjcnu41hWseTJQ1-9j66jNoOZ0x2QoP-dQCMxLvG3SvM2vSHcwNC4UmGH-TrgJzfwz7Ac1vWUscVe1bvsLSZwk4', cat: 'Adult' },
+                    { name: 'Greek Yogurt Parfait', price: 310, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDSQque1SrojrTuLz-6jTg1yT8DjGPS0Yh2Oh-Ev2WPf2enIb5vIH6Bl257hnr958RTR0qDdZpYUtYp91REkkoyrKJgALQX-BJxQp6untHlSzePvV-YKLt2v7AaS1alPNrg8QH53RDGCcwsPpFT1Wq37B7QYpGFv9u3iOjfkMvFyhAEcEu5HNjSL-sTc_EDIJT8wgOuB5HkvskeRslRYaA1_2_m7ZiAeOnQb-mLN1b91jOfMgbMTVsMqtU4GutGRTZhRlwg0O_EEyQ', cat: 'Healthy' },
+                    { name: 'Mixed Berry Smoothie', price: 280, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCDOpgiNDVgDa88tlUQ0ZPi3f1m3qgiNhT0dzuXPr3O0ZxTu9mhmP4lZHEPdHNFWuGFqeBK8g8eP_262cxiPcICM7gO2QMDNmbB8cIoXpnVhLxj81aE0Zbmb1_i9I5-KStNUna9CiaL5BVturJ8sytWmsnL19qeSsMQ4MNWvDGgsUF_WcICJ6TkaCEcAkPBF9FprpJLBV8y8WSliNKaneAmEf_hS-KlbRhTFwd1Hut_iHdpeU3lopBiC6j5MlFSyuhhvBxmNVFbvIU', cat: 'Healthy' },
+                    { name: 'Signature Cold Coffee', price: 350, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA51OAvBWKIhViMy8Z3DE0TNmQg7X8fQs46Ma3ySxnnWamkPDkSHL9eaGX4Wjd6JKiuTTPFZaffg5js9ZQesyrEN0FPYJJUN8jLl0A2QDnKqzF5aug98DjzwACbd7g7fE8QhVP1cGEy9TbLvN7SoAW-TCsK34W9VPtr4cb3FJoF9E6ATo4GmbTW8xrenEtolF0KuurDJfT_BiddgI1nHHI4jqDGYkW-C3sQrAPW93NF8zFPOaXHQQRl0vu62RiOZvsztR6s0wR-F0A', cat: 'Adult' },
+                    { name: 'Cheese Dip Trio', price: 150, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBnF_PLgmiTQ2fm8A2gMAGlQodWkKBe6r0K97Cn39e4MMRFlnjzPeqoxp7SWyua6_C-pyXyLuM-AnnekJ1YdTTo-z1ovfjA-VPBA_bZFXwt0yMExlLvHXkfV4D2sfL4sMKa2PGwxYyMQD37_cKTFTzMn5Nj3UP2ieDzquIFs7H44hW3Rh5OS723_6jpWUVqAEcg9MKpzmEIuZjkOg5i58uvZ_pLrBnFKe6H1vQoVs6ZFVa_ju2xNo8FcElHGtE5DgiDdPavp-WyWPo', cat: 'All' },
+                    { name: 'Hummus & Pita', price: 320, img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAAB_qOKYc12wLYjjMhEoPeSmagoWjV9uPAlQbkebvf14efw41SeikJ-wNRTaWV8Sy-oa1WyT7-dpQ2Jwmyai9RJXnUlZOBgninqloSWPcpgt4GE0Cxv9SXkow5PVhz6qujdbyNSomjdy9ZiAKP3DNtUM0grYkwhHkVxJdimcKsDJV2sQfm1_Nx5X1JhiBX9sh_iUCZBewNss2NmITmGZKQ0WIWEheN48d1IGk1hIcmILKGWxsTAUVaLY_f8RwtrWUHDfVCdr-iK5s', cat: 'Healthy' }
+                ];
+
+                document.write(items.map(item => `
+                    <div class="glass-card rounded-xl overflow-hidden group hover:border-primary-container transition-all duration-300">
+                        <div class="h-40 overflow-hidden relative bg-surface-container-low">
+                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute top-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-md rounded-md text-[10px] font-label-caps uppercase text-white">${item.cat}</div>
+                        </div>
+                        <div class="p-4 flex flex-col justify-between h-32">
+                            <h3 class="font-title-md text-sm text-on-surface leading-tight">${item.name}</h3>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="font-price-tag text-primary-container text-base">₹ ${item.price}</span>
+                                <button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-110 active:scale-90 transition-all">
+                                    <span class="material-symbols-outlined text-sm">add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join(''));
+            </script>
+</div>
+</main>
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-surface-container-low/90 backdrop-blur-2xl border-t border-white/5 flex justify-around items-center px-4 z-50 rounded-t-xl">
+<div class="flex flex-col items-center text-on-surface-variant/60"><span class="material-symbols-outlined">movie</span><span class="text-[10px] font-label-caps">Movies</span></div>
+<div class="flex flex-col items-center text-primary-container scale-110"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fastfood</span><span class="text-[10px] font-label-caps">Food</span></div>
+<div class="flex flex-col items-center text-on-surface-variant/60"><span class="material-symbols-outlined">confirmation_number</span><span class="text-[10px] font-label-caps">Tickets</span></div>
+<div class="flex flex-col items-center text-on-surface-variant/60"><span class="material-symbols-outlined">person</span><span class="text-[10px] font-label-caps">Profile</span></div>
+</nav>
+<button class="fixed bottom-20 md:bottom-10 right-6 w-16 h-16 bg-primary-container text-white rounded-full shadow-2xl flex items-center justify-center group z-50">
+<span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">shopping_basket</span>
+<div class="absolute -top-1 -right-1 w-6 h-6 bg-white text-primary-container font-bold text-xs rounded-full flex items-center justify-center border-2 border-primary-container">2</div>
+</button>
+</body></html>
