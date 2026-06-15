@@ -36,3 +36,12 @@ case "green":
         default:
             console.log("invalid signal color")
 }
+
+//do while
+
+let count = 3
+do{
+    console.log(count);
+    count++;
+}while (count<=4)
+    console.log("outside do..while");
