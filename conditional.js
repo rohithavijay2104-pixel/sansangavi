@@ -1,4 +1,3 @@
-//if else condition
 // if else condition
 
 var light = "green"

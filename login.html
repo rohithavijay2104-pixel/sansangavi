@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CINEPLEX - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&amp;family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ffb4aa",
+              "primary-container": "#e50914",
+              "on-primary-container": "#fff7f6",
+              "surface": "#121414",
+              "surface-container": "#1e2020",
+              "on-surface": "#e2e2e2",
+              "on-surface-variant": "#e9bcb6",
+              "outline": "#af8782",
+              "background": "#0c0f0f"
+            },
+            fontFamily: { display: ["Montserrat"], body: ["Inter"], mono: ["JetBrains Mono"] }
+          }
+        }
+      }
+    </script>
+<style>
+        .cinema-gradient { background: radial-gradient(circle at center, #1e2020 0%, #0c0f0f 100%); }
+        .glass { background: rgba(30, 32, 32, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 180, 170, 0.1); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 z-0 cinema-gradient">
+<div class="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[400px] bg-primary-container/10 blur-[120px] rounded-full"></div>
+</div>
+<main class="w-full max-w-md z-10 px-6">
+<div class="glass p-8 md:p-10 rounded-2xl shadow-2xl">
+<header class="text-center mb-8">
+<h1 class="font-display text-4xl font-800 text-primary-container tracking-tighter uppercase mb-1">CINEPLEX</h1>
+<p class="font-mono text-[10px] tracking-widest text-on-surface-variant uppercase">Premium Cinema Experience</p>
+</header>
+<div class="flex p-1 bg-background/50 rounded-xl mb-8 relative">
+<button class="flex-1 py-3 text-xs font-mono z-10 transition-colors text-primary-container font-bold" id="user-tab" onclick="switchTab('user')">USER LOGIN</button>
+<button class="flex-1 py-3 text-xs font-mono z-10 transition-colors text-on-surface-variant" id="admin-tab" onclick="switchTab('admin')">ADMIN LOGIN</button>
+<div class="absolute top-1 left-1 w-[calc(50%-4px)] h-[calc(100%-8px)] bg-surface-container rounded-lg transition-transform duration-300" id="slider"></div>
+</div>
+<form class="space-y-6" id="login-form" onsubmit="handleLogin(event)">
+<div class="space-y-4">
+<div class="space-y-1">
+<label class="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider ml-1">Email or Username</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary-container">person</span>
+<input class="w-full bg-background/40 border border-outline/20 rounded-xl py-3 pl-11 pr-4 focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none text-sm" placeholder="Enter credentials" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider ml-1">Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary-container">lock</span>
+<input class="w-full bg-background/40 border border-outline/20 rounded-xl py-3 pl-11 pr-4 focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none text-sm" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded-sm border-outline/30 bg-background text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="text-xs text-on-surface-variant group-hover:text-on-surface">Remember me</span>
+</label>
+<a class="text-xs text-primary-container hover:underline" href="#">Forgot?</a>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-mono text-xs font-bold tracking-[0.2em] hover:brightness-110 active:scale-[0.98] transition-all shadow-xl shadow-primary-container/10" onclick="event.preventDefault(); const isAdmin = document.getElementById('admin-tab').classList.contains('text-primary-container'); window.location.href = isAdmin ? '{{DATA:SCREEN:SCREEN_13}}' : '{{DATA:SCREEN:SCREEN_60}}';" type="submit">
+                    CONTINUE TO SCREEN
+                </button>
+<div class="text-center pt-6 border-t border-outline/10" id="signup-prompt">
+<p class="text-xs text-on-surface-variant">Don't have an account? <a class="text-primary-container font-bold hover:underline ml-1" href="#">Sign Up</a></p>
+</div>
+</form>
+</div>
+<div class="mt-8 flex flex-col items-center gap-4">
+<div class="flex justify-center gap-6 font-mono text-[9px] text-on-surface-variant/40 tracking-[0.15em]">
+<a class="hover:text-primary-container" href="#">PRIVACY</a>
+<a class="hover:text-primary-container" href="#">TERMS</a>
+<a class="hover:text-primary-container" href="#">SUPPORT</a>
+</div>
+<!-- Quick Dev Navigation for User Journey -->
+<div class="flex flex-wrap justify-center gap-2 opacity-30 hover:opacity-100 transition-opacity">
+<a class="text-[8px] border border-outline/20 px-2 py-1 rounded" href="{{DATA:SCREEN:SCREEN_60}}">HOME</a>
+<a class="text-[8px] border border-outline/20 px-2 py-1 rounded" href="{{DATA:SCREEN:SCREEN_37}}">SEATS</a>
+<a class="text-[8px] border border-outline/20 px-2 py-1 rounded" href="{{DATA:SCREEN:SCREEN_28}}">FOOD</a>
+<a class="text-[8px] border border-outline/20 px-2 py-1 rounded" href="{{DATA:SCREEN:SCREEN_36}}">PAY</a>
+<a class="text-[8px] border border-outline/20 px-2 py-1 rounded" href="{{DATA:SCREEN:SCREEN_22}}">RATE</a>
+</div>
+</div>
+</main>
+<script>
+        let currentRole = 'user';
+
+
+        function switchTab(type) {
+            currentRole = type;
+            const userTab = document.getElementById('user-tab');
+            const adminTab = document.getElementById('admin-tab');
+            const slider = document.getElementById('slider');
+            const signup = document.getElementById('signup-prompt');
+
+
+            if (type === 'user') {
+                slider.style.transform = 'translateX(0)';
+                userTab.classList.add('text-primary-container', 'font-bold');
+                adminTab.classList.remove('text-primary-container', 'font-bold');
+                adminTab.classList.add('text-on-surface-variant');
+                signup.style.display = 'block';
+            } else {
+                slider.style.transform = 'translateX(100%)';
+                adminTab.classList.add('text-primary-container', 'font-bold');
+                userTab.classList.remove('text-primary-container', 'font-bold');
+                userTab.classList.add('text-on-surface-variant');
+                signup.style.display = 'none';
+            }
+        }
+
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const destination = currentRole === 'user' ? '{{DATA:SCREEN:SCREEN_8}}' : '{{DATA:SCREEN:SCREEN_18}}';
+            window.location.href = destination;
+        }
+    </script>
+</body></html>

@@ -22,7 +22,7 @@ console.log("datatypes string");
 
 //null
  console.log("data types null");
- var isstudent ="true";
+ var isstudent ="null";
  console.log(isstudent);
 
 //symbols
