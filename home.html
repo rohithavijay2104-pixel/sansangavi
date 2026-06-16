@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CINEPLEX - Discover Movies</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#ffb4aa", "primary-container": "#e50914",
+                        secondary: "#fff9ef", "secondary-container": "#ffdb3c",
+                        surface: "#121414", "surface-variant": "#333535",
+                        background: "#121414", "on-background": "#e2e2e2",
+                        "on-surface": "#e2e2e2", "on-surface-variant": "#e9bcb6",
+                        outline: "#af8782", "on-secondary": "#3a3000"
+                    },
+                    borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+                    spacing: { sm: "8px", md: "16px", lg: "24px", xl: "48px", "margin-desktop": "80px", "margin-mobile": "16px", gutter: "16px" },
+                    fontFamily: { "display-lg": ["Montserrat"], "label-caps": ["JetBrains Mono"], "body-lg": ["Inter"], "title-md": ["Montserrat"] }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined { vertical-align: middle; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg selection:bg-primary-container selection:text-white pb-20">
+<header class="bg-background/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-full mx-auto">
+<span class="font-display-lg text-2xl font-bold tracking-tighter text-primary">CINEPLEX</span>
+<nav class="hidden md:flex gap-lg items-center font-label-caps text-xs">
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Movies</a>
+<a class="text-on-surface-variant hover:text-on-surface" href="#">Food</a>
+</nav>
+<span class="material-symbols-outlined text-primary cursor-pointer">account_circle</span>
+</div>
+</header>
+<main class="pt-24 px-margin-mobile md:px-margin-desktop">
+<section class="mb-xl">
+<div class="rounded-xl glass-card p-lg flex flex-col md:flex-row items-center justify-between gap-md border-l-4 border-primary-container">
+<div>
+<span class="font-label-caps text-xs text-secondary-container mb-sm block">EXCLUSIVE NEW RELEASES</span>
+<h2 class="font-display-lg text-xl text-white mb-2">Free Popcorn on all New Releases!</h2>
+<p class="text-sm text-on-surface-variant">Book now and enjoy a complimentary big-size popcorn with every 6 tickets.</p>
+</div>
+<button class="bg-secondary-container text-on-secondary px-lg py-md rounded-full font-bold hover:scale-105 transition-transform shrink-0" onclick="filter('ac')">Grab Deal</button>
+</div>
+</section>
+<section class="mb-lg flex flex-wrap items-center justify-between gap-4">
+<div class="flex gap-sm">
+<button class="filter-btn px-6 py-2 rounded-full font-label-caps text-[11px] bg-primary-container text-white" id="btn-all" onclick="filter('all')">ALL MOVIES</button>
+<button class="filter-btn px-6 py-2 rounded-full font-label-caps text-[11px] border border-outline text-on-surface-variant" id="btn-ac" onclick="filter('ac')">AC SCREENS</button>
+<button class="filter-btn px-6 py-2 rounded-full font-label-caps text-[11px] border border-outline text-on-surface-variant" id="btn-non-ac" onclick="filter('non-ac')">NON-AC SCREENS</button>
+</div>
+</section>
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-gutter" id="movie-grid">
+<!-- AC Movies -->
+<div class="movie-card group flex flex-col" data-cat="ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuCSJpdIQAfBjH-h8uoVkvw12a-ebZQ_TfxctZBMH65od0k2vAsJSIrGfJQ1DSfngvyOC2-h5d8R8-0ckYaQVzoCXJTQBCAfQDwW2aQzITywz0fifPpOZDsp63oR9MzH2ELcp1ugnIk7Ydp6hES4B20yurV_YvmTdhRAT_RJ5leSQTebctz88npXao1-WdlFFEmT1N35YCDlYL6TVBEC1aBxMvdXMSvQriQ0P1a7sq9su2k4va_VOTLwg"/></div>
+<h3 class="font-title-md text-white">Stranger Things</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Sci-Fi / Horror</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtAwtY5aZjzltzSziiEOLYPj0TcCU94RFy1pjI-g3dyZ4TlavonLwy1l4eZ1nO0VhL9m37r-rRchF80MsimuCKOTHb6bUuZkJauBeOR-Gy2bZlRTuuLbUMVRaHnzgrV7ep0r44p-9VoDNOlePCN7Qhok0X9Q6pGD8cqo9fzwnO4I9ScEP25mebUu20ah2OwLT1Th3DSpZRWAwchaf_5i1LJBl8V_ch7zfPolK5e2jDwt6XGDTsq6tV6Zsg"/></div>
+<h3 class="font-title-md text-white">Train to Busan</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Action / Horror</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuLiU3xBsrmePO1VIGpTBlldlQOaAvxm6CXBTI_cqIba_OvAtFHWQ2I2Jw0kPK5T9WkaUc2UMHDFJJXhYAMdnaptTK-CrzFlL6snTdSYZzV6HgZk7wp92GBbFkUPPDCM-NMITA3YIlxrXrA7ISDKOHMsZ8CRS7ehCAz-40PK0DwPEHjpgyGucudmLKK3nqIEZYypr-ZgnEByQ--0_ykA56m36yl-5PqtAs0D3LCR_F5GLMnObANL0BfF6E"/></div>
+<h3 class="font-title-md text-white">The Conjuring</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Horror / Supernatural</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLv5QZpCqGE6pqA-SfKpWcjub8FLbW3X4va80F-zesTdPaZjiUpY2o9cW5VwP7y6ZbcwQS5hHzBa64-7P_ZTlRxCnAZ3KDgsW1fYi9pJD8tWfa0IvaUNVnlvcmJj8qERSG_-0PgqmdUc5r9BintQuPqcl80BpzclFQBQHeGAyZjzmPPjAEpQsDHF5V8CYR7HEZ0oD9DeEcBsA3JwYTGVZNRVJ55e8kPAX0A6Ni4eUmqi07CCo-1Tg0cyboM"/></div>
+<h3 class="font-title-md text-white">The Nun</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Horror / Gothic</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuhMPV1tJWXS1oPPpNF7cWPIHlf9ODoBdGLGOhDwdJ457wG7tDXu7jxdHsOKcKgAbDCS_ha-EOK9UA2OMkwCuFY5a5DR8c8jBz6oPthCvQPf3d3k0kVqvR-LAQUE4fotafG39mVrqEmphENQOKvDitXvkVxfm9Fqj8uiiiLVFBwPzTEu8wMFLqK9fEff7dKwXOwiZEl6dF4KFfIjh6xTNXz1Q2GWKaVCPto2412AJsh4qoe_K_JLkL4vw"/></div>
+<h3 class="font-title-md text-white">Interstellar</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Sci-Fi / Adventure</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<!-- Non-AC Movies -->
+<div class="movie-card group flex flex-col" data-cat="non-ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtTugtjdJrDaXcG9KzjIZSs1N4mXB3rZQmPsZiTEjwnhc_lzuNSu7Bps6UWtznLrj9wYheOwtJGwNoFwOb4d_v9y7hJglvvFWPOcLSc69H8oTm-ZAK_CceyvLfZU8ww0FX_I1L_JxoByp0Hvjq3t11zj9EE0nX3ekocMuRPNi5NhbUoHJWZ7Xrm86yzIeXIhei6t2YkLNSchNbZBkHjDNC-A4PLQbgKscDyFUl6TBIEaHtoptpz6y4ihGI"/></div>
+<h3 class="font-title-md text-white">Inception</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Sci-Fi / Thriller</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="non-ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuG6ZfjW8yNSGK0aiasmFDshUIXnfY6Fx78Q-nLlpzzguCxYb42cAGsFxJjNcF9hrYYEzqoa--yfHyD08PupUPgVbiMXnOt8sd_sTeRIF2xXqy5jUTyd3w-DpqgnB7RNwO0TPwegdRZc0A2zFrg15TW8w7FM6Q5bkU3MAyv8EdB5BQM0MzdlBeUz7lXkeb_D-ezjAEt-1shX9Ohd9GQQ85uyqu5A0tbyNKQgZbZ-2VceHg30Apt9du82tU"/></div>
+<h3 class="font-title-md text-white">Obsession</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Thriller / Drama</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="non-ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtlRPJh6qIy814I1GY6N2y27WVrc1W-RZsisNRGrjMbGhG7u0lmtDJqwhbKszAXNGAJaBCJ9TkJxVEGheIYZrba5_9rGlBKMt-v0jXUsNC9VGuBprpc_7iqZdUL2t-2VwtYLGj4cA_iGSR8Znfy-7TprUbaKO7qugaFFCTKWShV9TurOwhXWzgMAmpBsj0VDJz3LLtu8TexRZNXlzGw3CSdJ40P3L9r9c4lNBitSHqWweQX8BJszPkhvqc"/></div>
+<h3 class="font-title-md text-white">Evil Dead</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Horror / Gore</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="non-ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLue1FlS8vHej__ZbUyw-OWbDH-TVVgxTMhow_e8QmNMvhd2xfsaVufw1REIpZBoKqj5qoX40jk9KONCGBv-6FGbYisFCTga-vMvo7fCAEvS_HMhr4f3TT3VIOrzoW1z283us85194mQeJlwp0H3jRk_3o88z62HNUblbyigE3RFehrzPzxaOToHjk8nsJXsREAlyneJBHCkps7Y5k-GQKdiFUW485OakSQK4cc4yBzA-e5hSmnrL3KyF2g"/></div>
+<h3 class="font-title-md text-white">Dhurandhar</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Action / Comedy</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+<div class="movie-card group flex flex-col" data-cat="non-ac">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-4"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLvUGNsAqOYUhDrXfL1SPIvXrBDsreRe-0M_BFkGVA8RpMP5WCEm3vFR9d-HSD0A0h7oKPGSspgxPBKrUcswkyFGGFnbFQd7I9lTBS4Nj9KjpbAflCZyuHFixlkhbBBXPNY96hUExPlrY-fpiCm6Id7-hE-QHE_5mO0tu_NjkmvolXb7gJlLKQ3SCYTgMWzBph61Z93_LTjgw64Bx-MBJkDqwr2-6y3gYKMVMW3P8335bo3C5FVk4DRDTos"/></div>
+<h3 class="font-title-md text-white">Dhurandhar - The Revenge</h3>
+<p class="text-[11px] font-label-caps text-primary/80 mt-1">Action / Thriller</p>
+<div class="flex flex-wrap gap-2 mt-4" id="timings"></div>
+</div>
+</section>
+</main>
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 flex justify-around items-center bg-surface-container-lowest/90 backdrop-blur-2xl border-t border-white/5 z-50">
+<a class="flex flex-col items-center text-primary-container" href="#"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">movie</span><span class="text-[10px]">Movies</span></a>
+<a class="flex flex-col items-center text-on-surface-variant/60" href="#"><span class="material-symbols-outlined">fastfood</span><span class="text-[10px]">Food</span></a>
+<a class="flex flex-col items-center text-on-surface-variant/60" href="#"><span class="material-symbols-outlined">person</span><span class="text-[10px]">Profile</span></a>
+</nav>
+<script>
+    const times = ['10:00 AM', '1:30 PM', '4:30 PM', '9:00 PM'];
+    document.querySelectorAll('#timings').forEach(container => {
+        times.forEach(time => {
+            const btn = document.createElement('button');
+            btn.className = 'text-[10px] font-bold border border-white/20 px-2 py-2 rounded hover:bg-primary-container hover:text-white transition-colors flex-1';
+            btn.textContent = time;
+            container.appendChild(btn);
+        });
+    });
+
+
+    function filter(c) {
+        document.querySelectorAll('.movie-card').forEach(card => card.classList.toggle('hidden', c !== 'all' && card.dataset.cat !== c));
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            const active = btn.id === 'btn-' + c;
+            btn.className = `filter-btn px-6 py-2 rounded-full font-label-caps text-[11px] ${active ? 'bg-primary-container text-white' : 'border border-outline text-on-surface-variant'}`;
+        });
+    }
+</script>
+</body></html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Montserrat:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; transition: all 0.3s ease; }
+        .star-active { font-variation-settings: 'FILL' 1 !important; color: #ffe16d !important; text-shadow: 0 0 12px rgba(255, 225, 109, 0.5); }
+        .glass-panel { background: rgba(30, 32, 32, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .red-glow-btn { box-shadow: 0 0 20px rgba(229, 9, 20, 0.4); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .red-glow-btn:hover { box-shadow: 0 0 35px rgba(229, 9, 20, 0.6); transform: translateY(-2px); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container": "#1e2020", "on-background": "#e2e2e2", "surface": "#121414",
+                        "on-surface-variant": "#e9bcb6", "background": "#121414", "primary-container": "#e50914",
+                        "primary": "#ffb4aa", "secondary-fixed": "#ffe16d", "on-surface": "#e2e2e2",
+                        "outline": "#af8782", "outline-variant": "#5e3f3b"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Montserrat"], "headline-lg": ["Montserrat"], "body-lg": ["Inter"], "label-caps": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    },
+                    spacing: { "margin-mobile": "16px", "margin-desktop": "80px", "lg": "24px", "xl": "48px" }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-lg overflow-x-hidden min-h-screen">
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-sm flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4">
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-primary-container dark:text-primary">CINEPLEX</div>
+<nav class="hidden md:flex gap-8">
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1" href="#">Movies</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors" href="#">Food</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors" href="#">Admin</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-80 transition-opacity">account_circle</span>
+</div>
+</header>
+<main class="pt-32 pb-20 px-margin-mobile max-w-4xl mx-auto flex flex-col items-center">
+<div class="w-full flex flex-col items-center" id="feedback-form"><div class="mb-8 text-center"><p class="text-secondary-fixed font-bold text-headline-lg-mobile md:text-headline-lg tracking-wide">Thanks for booking and have a great time</p></div>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-center mb-xl">Rate Your Experience</h1>
+<div class="glass-panel w-full rounded-xl p-8 mb-lg flex flex-col items-center gap-lg">
+<div class="flex gap-4" id="star-rating">
+<button class="star-btn" data-index="1"><span class="material-symbols-outlined text-4xl text-on-surface-variant/40">star</span></button>
+<button class="star-btn" data-index="2"><span class="material-symbols-outlined text-4xl text-on-surface-variant/40">star</span></button>
+<button class="star-btn" data-index="3"><span class="material-symbols-outlined text-4xl text-on-surface-variant/40">star</span></button>
+<button class="star-btn" data-index="4"><span class="material-symbols-outlined text-4xl text-on-surface-variant/40">star</span></button>
+<button class="star-btn" data-index="5"><span class="material-symbols-outlined text-4xl text-on-surface-variant/40">star</span></button>
+</div>
+<div class="w-full relative">
+<label class="font-label-caps text-label-caps text-outline mb-2 block">TELL US MORE</label>
+<textarea class="w-full bg-transparent border border-outline/30 rounded-lg p-4 h-40 focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all outline-none text-on-surface" placeholder="Your thoughts on the sound, seating, or service..."></textarea>
+</div>
+<button class="red-glow-btn bg-primary-container text-white font-headline-lg text-body-lg px-xl py-4 rounded-full w-full md:w-auto mt-4" onclick="submitRating()">
+                    Submit Rating
+                </button><p class="font-headline-lg text-label-caps text-secondary-fixed mt-8 text-center tracking-wide">Thanks for Booking! Have a great time!</p>
+</div>
+</div>
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-md p-margin-mobile" id="success-state">
+<div class="text-center space-y-6 max-w-lg">
+<div class="w-24 h-24 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+<span class="material-symbols-outlined text-primary-container text-6xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary">Thanks for Booking!</h2>
+<p class="font-body-lg text-on-surface-variant">Have a great time at the movies! Your feedback helps us keep the magic alive.</p>
+<button class="font-label-caps text-label-caps text-primary border border-primary/30 px-8 py-3 rounded-full hover:bg-primary/10 transition-all mt-8" onclick="window.location.href='{{DATA:SCREEN:SCREEN_44}}'">RETURN TO HOME</button>
+</div>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 w-full h-16 flex md:hidden justify-around items-center px-4 pb-safe bg-surface-container-lowest/90 backdrop-blur-2xl border-t border-white/5 z-50">
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 font-label-caps text-label-caps"><span class="material-symbols-outlined">movie</span>Movies</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 font-label-caps text-label-caps"><span class="material-symbols-outlined">fastfood</span>Food</div>
+<div class="flex flex-col items-center justify-center text-primary-container font-bold scale-110 font-label-caps text-label-caps"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>Bookings</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/60 font-label-caps text-label-caps"><span class="material-symbols-outlined">person</span>Profile</div>
+</div>
+<script>
+        const stars = document.querySelectorAll('.star-btn');
+        let selectedRating = 0;
+
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.getAttribute('data-index'));
+                updateStars();
+            });
+            star.addEventListener('mouseenter', () => highlightStars(parseInt(star.getAttribute('data-index'))));
+            star.addEventListener('mouseleave', updateStars);
+        });
+
+
+        function highlightStars(index) {
+            stars.forEach((s, i) => {
+                const icon = s.querySelector('.material-symbols-outlined');
+                if (i < index) icon.classList.add('star-active');
+                else icon.classList.remove('star-active');
+            });
+        }
+
+
+        function updateStars() {
+            stars.forEach((s, i) => {
+                const icon = s.querySelector('.material-symbols-outlined');
+                if (i < selectedRating) icon.classList.add('star-active');
+                else icon.classList.remove('star-active');
+            });
+        }
+
+
+        function submitRating() {
+            if (selectedRating === 0) { alert('Please select a star rating first.'); return; }
+            document.getElementById('feedback-form').classList.add('opacity-0', 'transition-opacity', 'duration-500');
+            setTimeout(() => {
+                document.getElementById('feedback-form').style.display = 'none';
+                document.getElementById('success-state').classList.remove('hidden');
+            }, 500);
+        }
+    </script>
+<button class="fixed bottom-20 right-4 md:bottom-8 md:right-margin-desktop z-50 font-label-caps text-label-caps text-secondary-fixed border border-secondary-fixed/30 px-6 py-2 rounded-full glass-panel hover:bg-secondary-fixed/10 transition-all" onclick="window.location.href='#'">BACK TO HOME</button></body></html>

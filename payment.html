@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>CINEPLEX - Payment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@400,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = { darkMode: "class", theme: { extend: {
+            colors: { "surface-container": "#1e2020", primary: "#ffb4aa", "primary-container": "#e50914", background: "#121414", "on-surface": "#e2e2e2", "on-surface-variant": "#e9bcb6" },
+            fontFamily: { Montserrat: ["Montserrat"], Inter: ["Inter"] },
+            spacing: { lg: "24px", md: "16px", sm: "8px", "margin-desktop": "80px", "margin-mobile": "16px" }
+        }}}
+    </script>
+<style>
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .active-upi { border-color: #e50914; background: rgba(229, 9, 20, 0.1); }
+        .ticket-mask { mask-image: radial-gradient(circle at 0 50%, transparent 15px, black 15px), radial-gradient(circle at 100% 50%, transparent 15px, black 15px); mask-composite: intersect; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-['Inter'] min-h-screen">
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4">
+<div class="font-['Montserrat'] text-2xl md:text-3xl font-extrabold tracking-tighter text-primary">CINEPLEX</div>
+<div class="hidden md:flex gap-8 items-center font-['JetBrains_Mono'] text-xs uppercase tracking-wider">
+<a class="text-on-surface-variant hover:text-white" href="#">Movies</a><a class="text-on-surface-variant hover:text-white" href="#">Food</a><a class="text-on-surface-variant hover:text-white" href="#">Admin</a>
+<span class="material-symbols-outlined text-primary cursor-pointer">account_circle</span>
+</div>
+</nav>
+<main class="pt-28 pb-12 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg" id="pay-v">
+<div class="lg:col-span-5 order-2 lg:order-1">
+<div class="glass rounded-xl p-lg sticky top-28">
+<div class="bg-primary-container/20 border border-primary/30 rounded-lg p-3 mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-primary">redeem</span><div><p class="text-xs font-bold text-primary uppercase tracking-wider">CONGRATULATIONS!</p><p class="text-[10px] opacity-80">You've earned a FREE Big Size Popcorn! (No extra charge)</p></div></div><h2 class="font-['Montserrat'] text-2xl font-bold text-primary mb-md">Order Summary</h2>
+<div class="space-y-4 border-b border-white/10 pb-md mb-md">
+<div class="flex justify-between items-start">
+<div><h3 class="font-['Montserrat'] font-semibold">Stranger Things: The First Shadow</h3><p class="text-sm text-on-surface-variant">Standard AC | Screen 04 | Today, 07:30 PM</p></div>
+<span class="bg-primary-container text-[10px] px-2 py-1 rounded font-bold">PREMIUM</span>
+</div>
+<div class="flex justify-between text-sm"><span>Adult (x2)</span><span class="font-bold">₹ 380</span></div>
+<div class="flex justify-between text-sm"><span>Kids (x1)</span><span class="font-bold">₹ 130</span></div>
+<div class="flex justify-between text-sm"><span>Internet Fee</span><span class="font-bold">₹ 28</span></div><div class="flex justify-between text-sm text-primary"><span>Big Size Popcorn (Reward)</span><span class="font-bold">FREE</span></div>
+</div>
+<div class="flex justify-between items-center font-['Montserrat']"><span class="text-xs uppercase opacity-60">Total</span><span class="text-3xl font-bold text-primary">₹ 538</span></div>
+</div>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2 space-y-md">
+<div class="glass rounded-xl p-lg">
+<h3 class="font-semibold mb-md flex items-center gap-2"><span class="material-symbols-outlined text-primary">payments</span> Unified UPI Gateway</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+<button class="u-o border border-white/10 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:bg-white/5" id="u-p" onclick="sel('p')"><img class="h-6 invert opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBagJU9tRuGLux1QPBzBe1gM-dC0VyCyNHq7UqTD2EOIv763IXTtaJSoQ0kGpMhUfMg7kgifNHsaXJq_BC0RUG3j6BnoeMkI6fU7nZRS1g3pFnmZNsgmCp_vNdti4jM_5kh9JoC3UMO4i_TiDaP1TORyfGQMxz5B62y4kQWSrrpFfCACeTmdUQabJ0DodxrsawZbKrfgTZSDkKcHy3sh0Xal9YYf4vSUMJ3uho2_Ih0twtd1nW1wj6gJ-FVNg256soKRfmZ7cEwupU"/><span class="text-[10px] font-bold">PAYTM</span></button>
+<button class="u-o active-upi border border-white/10 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:bg-white/5" id="u-g" onclick="sel('g')"><img class="h-6 invert opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTxon9d9lG8QeOFK6IKDaiSmJTQq4stOf4qscyEJ4WFhaCVkS1Ey8M985UyZe5PKzKWyNdstBqqB75WyQXdF-oSVkE74Gd0V4cJGK1VR85FcWkZoJN3d6NhBSiWwJcpd1d9JcOj3I94reqaSR60tz3DgYFM1KnJYpI-1bfgzXOf7ZUOAVQQDPX685XeoggMQeRx5Gyk4vqe_-_26SHTs1gAVHepmc0T6E_ySXH3hCRIiw4NR-LizO3VmcgOLS5dtO7PwdKiu5h6aw"/><span class="text-[10px] font-bold">GPAY</span></button>
+<button class="u-o border border-white/10 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:bg-white/5" id="u-ph" onclick="sel('ph')"><img class="h-6 invert opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1auKk5SOGwEzcKzt27nWFX9bDsvl3g2O3Hj_IgLYmnuOJqQ9rBKAh3IZoW1rq2CVdsy2aJ5Y0qL0-Zh7XTfRtj46bbJB3OXPMsRFj2QATQyq4FyZb4i7Qb3RhcpPE6NgKq3LQ7xmIks23xFe8x-QP4QkuJNTkOGfjE3X0Pn1nsIp7X4vE0iIzPQKEM9CscRkn_Ux_k_u9wKY2V34P_n7370LcYgYR3vOBKNxpro8rbAJPdOamVPXYpDsyWL9xTBHfI80PrSK5q-w"/><span class="text-[10px] font-bold">PHONEPE</span></button>
+<button class="u-o border border-white/10 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:bg-white/5" id="u-n" onclick="sel('n')"><span class="material-symbols-outlined text-primary">account_balance</span><span class="text-[10px] font-bold">NET BANKING</span></button>
+</div>
+<div class="hidden mb-6" id="b-s"><select class="w-full bg-surface-container border-white/10 rounded-lg p-3 text-sm"><option>HDFC Bank</option><option>ICICI Bank</option><option>SBI</option></select></div>
+<div class="bg-white p-8 rounded-xl flex flex-col items-center gap-4 text-background">
+<img class="w-40 h-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh51vWBElZuNpT8G7K_2dGOrtWVB0pRSiwirSM9aqcn53x_E7wNMi_J-ExbgrtaKQVmSdCCvSCRc08OuTO5LyHKVImjiCd2LIvraky9fLNyIBGc4K0jCv-nT5AUyor3E5bAYZI2bPqz9fPONsmrhigJ4si1Y13v3FyCk7SU3HQScruzPUrPxvs8tUKMj_hhZyLw70q9Zb0rjYqkuyZe1Ns2gkQcxqAwYyYR8Uq3S56XWyZKqnEc5QSgyCWyc0zR3rZHL-Nu1a-awE"/>
+<p class="text-xs text-center">Scan QR with any app to pay <strong class="font-bold">₹ 538</strong></p>
+</div>
+<button class="w-full mt-6 bg-primary-container text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all" id="p-b" onclick="proc()">
+                        Complete Payment <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="hidden max-w-md mx-auto" id="t-v">
+<div class="text-center mb-8"><span class="material-symbols-outlined text-5xl text-primary mb-2">check_circle</span><h2 class="text-2xl font-bold">Booking Confirmed!</h2></div>
+<div class="glass rounded-2xl overflow-hidden relative shadow-2xl">
+<div class="h-40 bg-cover bg-center flex items-end p-4" style="background-image: linear-gradient(to top, #1e2020, transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4k6rv8QS-hhyKoMFweQdBNvsbuKCAnOgt-g1pJiRo575wd54Z19hZj2jrY5lBvrwVRv1vvrNwJJG8kqpTagTk_3h9YM8ML8naETaCqfzlJAofZfF0-xx1ocp_1gGYZQhuJSSof8gGgUyPYZYSQ9aVYGrKUB3K8EgZOVEZYzgojgwGw4VNbT6-8NGLgEEC4iS6cIpk2ynhFHKUtKTz2dCXPHMxjURpx1ba2By3KoskLOgOBr8l6RLuE8W7atI4oDVCtbQwq2fCxA')">
+<h3 class="font-bold uppercase text-xl">Stranger Things</h3>
+</div>
+<div class="p-6 space-y-6 ticket-mask bg-surface-container">
+<div class="grid grid-cols-2 gap-4 border-b border-white/5 pb-6 text-sm">
+<div><p class="opacity-50 text-[10px]">DATE</p><p class="font-bold">24 Oct, 2024</p></div>
+<div><p class="opacity-50 text-[10px]">TIME</p><p class="font-bold">07:30 PM</p></div>
+<div><p class="opacity-50 text-[10px]">SCREEN</p><p class="font-bold">Screen 04</p></div>
+<div><p class="opacity-50 text-[10px]">SEATS</p><p class="font-bold">H12, H13, H14</p></div><div class="col-span-2 mt-2 pt-2 border-t border-white/5"><p class="opacity-50 text-[10px]">REWARD</p><p class="font-bold text-primary">FREE Big Size Popcorn</p></div>
+</div>
+<div class="flex flex-col items-center gap-3">
+<div class="bg-white p-2 rounded-lg"><img class="w-24 h-24" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHdp2ia3doXTpGHiAFUqCK29V9q6gPzfj-DZ-NRaornqpHyUTAqPfsVKqo2ptO6ix39J6wAkeKfsbg3EMsFNx55ErkhkNFp9Ddcd4HevM76u7R4gZdSn-Ven97xmTkjqmaepEUXGfkIxF7LgFDkEjMNl1RcBYhzsUil8oc-vp-7Q7gxj0QnAd5LcGmfE4Ssr5vcGBaEYA6S3hVBte319Rtnh9dy80LRhPtuw5fmrAcJqY1qZ7FV40H1kYOClelSDbxl1mlPaNX-ts"/></div>
+<p class="text-[10px] tracking-widest opacity-50">ID: CPX-8829-X0</p>
+</div>
+</div>
+<div class="bg-primary-container p-3 flex justify-between px-6 text-[10px] font-bold"><span>PAID ₹ 538</span><span class="material-symbols-outlined text-sm">confirmation_number</span></div>
+</div>
+<div class="mt-8 flex gap-3"><button class="flex-1 border border-white/10 rounded-lg py-3 text-xs font-bold">DOWNLOAD</button><button class="flex-1 bg-white/5 rounded-lg py-3 text-xs font-bold">SHARE</button></div>
+</div>
+</main>
+<nav class="md:hidden fixed bottom-0 w-full h-16 bg-background/90 backdrop-blur-xl border-t border-white/5 flex justify-around items-center text-[10px]">
+<div class="flex flex-col items-center opacity-50"><span class="material-symbols-outlined">movie</span><span>Movies</span></div>
+<div class="flex flex-col items-center text-primary"><span class="material-symbols-outlined">confirmation_number</span><span>Bookings</span></div>
+<div class="flex flex-col items-center opacity-50"><span class="material-symbols-outlined">person</span><span>Profile</span></div>
+</nav>
+<script>
+        const sel = (id) => {
+            document.querySelectorAll('.u-o').forEach(e => e.classList.remove('active-upi'));
+            document.getElementById('u-'+id).classList.add('active-upi');
+            document.getElementById('b-s').classList.toggle('hidden', id !== 'n');
+        };
+        const proc = () => {
+            const b = document.getElementById('p-b');
+            b.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Processing...'; b.disabled = true;
+            setTimeout(() => { 
+                document.getElementById('pay-v').classList.add('hidden');
+                document.getElementById('t-v').classList.remove('hidden');
+                window.scrollTo({top:0, behavior:'smooth'});
+            }, 1200);
+        };
+    </script>
+</body></html>

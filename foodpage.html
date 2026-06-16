@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .active-chip { background-color: #e50914 !important; color: white !important; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #333535; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { "surface-container-low": "#1a1c1c", "background": "#121414", "primary-container": "#e50914", "primary": "#ffb4aa", "on-surface": "#e2e2e2", "on-surface-variant": "#e9bcb6", "surface-variant": "#333535" },
+                    fontFamily: { "display-lg": ["Montserrat"], "headline-lg": ["Montserrat"], "body-lg": ["Inter"], "label-caps": ["JetBrains Mono"], "price-tag": ["Inter"], "title-md": ["Montserrat"] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-lg antialiased selection:bg-primary-container">
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-6 md:px-8 py-4">
+<h1 class="font-display-lg text-2xl md:text-3xl tracking-tighter text-primary-container">CINEPLEX</h1>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 font-label-caps text-[12px]">
+<a class="text-on-surface-variant" href="#">Movies</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Food</a>
+<a class="text-on-surface-variant" href="#">Admin</a>
+</nav>
+<a class="bg-primary-container hover:bg-primary-container/80 text-white px-12 py-4 rounded-full font-label-caps text-lg font-bold transition-all shadow-2xl scale-110 hover:scale-125" href="#payment">Skip</a>
+</div>
+</header>
+<main class="pt-24 pb-32 max-w-7xl mx-auto px-4 md:px-8">
+<div class="mb-8 p-4 glass-card rounded-xl flex items-center gap-4 border-l-4 border-primary-container">
+<span class="material-symbols-outlined text-primary-container text-3xl">info</span>
+<div><p class="font-bold">Interval Service Only</p><p class="text-sm text-on-surface-variant">Food service provided only in Interval breaks.</p></div>
+</div>
+<section class="mb-12">
+<h2 class="font-headline-lg text-3xl mb-6">Snacks &amp; Drinks</h2>
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar" id="filters">
+<button class="active-chip glass-card border border-white/10 px-6 py-3 rounded-full flex items-center gap-2 font-label-caps text-[12px] shrink-0" data-cat="ALL">
+<span class="material-symbols-outlined text-sm">fastfood</span> All Foods
+                </button>
+<button class="glass-card border border-white/10 px-6 py-3 rounded-full flex items-center gap-2 font-label-caps text-[12px] shrink-0" data-cat="ADULT">
+<span class="material-symbols-outlined text-sm">set_meal</span> Adults Food
+                </button>
+<button class="glass-card border border-white/10 px-6 py-3 rounded-full flex items-center gap-2 font-label-caps text-[12px] shrink-0" data-cat="HEALTHY">
+<span class="material-symbols-outlined text-sm">icecream</span> Kids Healthy Foods
+                </button>
+</div>
+</section>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6" id="grid"></div>
+</main>
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-surface-container-low/90 backdrop-blur-2xl border-t border-white/5 flex justify-around items-center px-4 z-50 rounded-t-xl">
+<div class="flex flex-col items-center opacity-60"><span class="material-symbols-outlined">movie</span><span class="text-[10px] font-label-caps">Movies</span></div>
+<div class="flex flex-col items-center text-primary-container"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fastfood</span><span class="text-[10px] font-label-caps">Food</span></div>
+<div class="flex flex-col items-center opacity-60"><span class="material-symbols-outlined">confirmation_number</span><span class="text-[10px] font-label-caps">Tickets</span></div>
+<div class="flex flex-col items-center opacity-60"><span class="material-symbols-outlined">person</span><span class="text-[10px] font-label-caps">Profile</span></div>
+</nav>
+<div class="fixed bottom-20 md:bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl glass-card rounded-full p-2 px-6 z-50 hidden flex items-center gap-4 shadow-2xl border-primary-container/30" id="tray">
+<span class="text-xs font-label-caps text-primary-container shrink-0">Your Tray:</span>
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="tray-items"></div>
+</div><a class="fixed bottom-20 md:bottom-10 right-6 w-16 h-16 bg-primary-container text-white rounded-full shadow-2xl flex items-center justify-center group z-50" href="#payment">
+<span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">shopping_basket</span>
+<div class="absolute -top-1 -right-1 w-6 h-6 bg-white text-primary-container font-bold text-xs rounded-full flex items-center justify-center border-2 border-primary-container" id="cart-badge">0</div>
+</a>
+<script>
+        const items = [
+            { n: 'Truffle Butter Popcorn', p: 450, img: 'https://lh3.googleusercontent.com/aida/AP1WRLs0rSkfEC5e01L15UP95XtjFLdoKmmu1efGUrxbwFcmjN_aG-02i-BatTVAOwZuy6R7zI9kc22Yi0WR-XL7lumvZDY3_TWWzOGEBy5wJTi4SXXUvk5tNB0jflIf5VxB1XLN2DRMZXjrdAP3f_x0IauNFwOnaI6RU9uiuFV-GeV6DM_nb-y6Vz4cIA8i2Eb2MSl_gVl6-4C1A43N7l2rGLTAUUSMj15T9vvXnOy8zxgG5d7JGtxHA2sU6A', c: 'ADULT' },
+            { n: 'Classic Salted', p: 250, img: 'https://lh3.googleusercontent.com/aida/AP1WRLvpG73AzCR6xP1wxf7gc382F2DvdnXemxVGAizPWWb8eyj8xqjZJ7sptjLI7nCBWArP2kWVimnWd8AiMMlqknSxgBMWTbWK3by78a2mANn6eZlRpSdb2Xog0DLGPTpa-7nwxHlc0B2pCZzn182qYpPByy7m6nrewyWoWCglTQGLgGYu-hDSBhWXhxo4zqVWb8rZ2qlzHcvYQN_G5pBlaJgnfi3emdWgcezF8sHxzi0lUyfqdCA8MkIn7lQ', c: 'ALL' },
+            { n: 'Caramel Glaze', p: 320, img: 'https://lh3.googleusercontent.com/aida/AP1WRLvFnnf9bdpJRiJgZfoM8CLjK8maEWTpxB1LYAj0iAeI6xqJKI5CcEetQO4QpQe7nY8DqezyjaHX7c3iqAflvwu3db8MLkJULRPNY_-UBoxqh_pYpQiLO0IqGy15oJlY45oB3ppzsJTpPyvTbrF8d6FfXLRY2Rm2HY-QFDJKMdn46WJALs_APU194hj8ZeWJkLW1PsRHTV4XOC3IafYHGqXJRTyM4W_YOYV6EqnEras22Cvf7Q3BUnqxud8', c: 'ALL' },
+            { n: 'Loaded Nachos', p: 480, img: 'https://lh3.googleusercontent.com/aida/AP1WRLtmlNc1wDve0iKfw6035cgWpqCUNj0ydi9UYFXhKjTnt5kdU5n7Nu3pIDxif3shEH0lK-kjULXx-naSXk5qqJd2Hc-0QX0Sosrf5dOJVrEhbbje7BQdDo0NEXpIeqPjGmuGkeNH4_IYUbhUJgEnO9RcwAo1KDOsCNuhywsmtZITltG6L0ge2geYxZjH3mE-WmGw0wCjUgeWLZY299xpv9Q4GkdpiMgrqdQzLqY4WUMnr56WTMF0XK3FlmA', c: 'ADULT' },
+            { n: 'Chicken Sliders', p: 550, img: 'https://lh3.googleusercontent.com/aida/AP1WRLs5EHNE6B6Q12sNISEpWl084PdE1qDl0lnY1XDZgALNeo6AkQQecAd4A7a4vyRn59nC0JM1UReYtZeWrvYvqZGnkaG0tbosGuKXVbf0YIgSz3CQGw1IK6o7nkX_NimHgA-pK0ACRqG7Ej6-ZByeADF2awod8Kfmy9pG5JU0uLWddxO_i-DcuVJeTkja6PYiIJK9z4clQlEyFL4uAVF06_rX2EzcX8TuCdXCkoXu5Y4KI4mD4895j0dyxGA', c: 'ADULT' },
+            { n: 'Veggie Wrap', p: 380, img: 'https://lh3.googleusercontent.com/aida/AP1WRLukv2EbJ_HKVtw9Bwjx1ycIjxXnWwHd-qQZMr7Z9kOeOLnK9i6kPwzNzpD4kH05lYWAbE6tdQfL0d3Sl3OEWMUYixfBH0LW1grO6NtlIVq89Ko59yK_d2LEpeh-n_qD2PwXE3B4HMeSHFvZYtauyf8padjT10Pdp6c0pU3Q6EvUDBh2MWIO99aBrw2Wdv1zQw2dANSxGMaLSbSvyAoDZM5V_zbNZFW20_xNi1KcJcmNPs9ss8BnlK2qN1k', c: 'HEALTHY' },
+            { n: 'Fruit Medley Cup', p: 220, img: 'https://lh3.googleusercontent.com/aida/AP1WRLvoxbV_9-Zgu_6CkOl45CdynHmAFz6afQELvIn5cLJAANXbAwgjHPIBbYtBezmmnSQOKo4waKbADIDowgmhwwH7HH118z-3R1lL0tLIzxJqWtK6jOiBczpXTqhexaCICnqPxhwNE_tCGIjLtJ96Y1U09uwzuFqV1y_OlaeGc65LSjTc5lwBlLHfuK8y0pyGhBcsje4Z9qRkIGn1z1MWKhUbDPcbUdm0e4PpL0vZtjf5SuMhNN9aIDZ3XGY', c: 'HEALTHY' },
+            { n: 'Organic Apple Juice', p: 180, img: 'https://lh3.googleusercontent.com/aida/AP1WRLsGbcqGw3U0VovrnxmySPA3ICn6lZX2YGvMK9gO55qYs4sIpPvch2Ppu0aUwviSk4YOXpFE3gIoYuB0zcK3_TRVYBEiPYG8nIuMaDkDW3HW7xiBV_e4DeUnaYpcAPvuB_if81WSCMd--U547FnXNWKVxGQWKMwE3XVyRXOEDbE-36jFvWINm-1kAX30CYnBCE127e8Zem4K6pt3VnhBX3z_IwofY8-Lu3c7TLR1xm65tziWzh_Jl9pRTzU', c: 'HEALTHY' },
+            { n: 'Peri Peri Popcorn', p: 290, img: 'https://lh3.googleusercontent.com/aida/AP1WRLvtiWFUX-PWxSai51vvskg6cwp8-9417vtT7SzPy9W02ckmXpavhxWAawErYC0P_T96NF_xxWtAmBWZvhAZFy-SfFwJ_v3lzMZVsKqJDgu2f4c4fgjKSW9mDHTO7pX_QOD4LBPdalGKuSMqIQ2DH88ru2JPiHBkhGKd4t5AWIfcmSDO9rwxflw_mdpW90vUFlKSF3E43Euxd_ERfcHmT8IqgMmk3sWdAOH68JMFpXTthuiw6MDwqj28ORU', c: 'ALL' },
+            { n: 'BBQ Pulled Pork Bun', p: 590, img: 'https://lh3.googleusercontent.com/aida/AP1WRLsqdMFOAz_MfhIgd4anuKwOj1EVVP9Hawp2jcdLllkl-uU9T_E5Np5BGRkUZNlP_II2AD8wwc8znb2ZT1HEgsQvw0PojetncHesxKjgqeGXNlB0FQ6CiGit2prXJIqGrjqjuTf-w5lOtZbTGrZc6QlaZn2JAyaEOx1HqooDIMIX4KqxS4-CNa6wdNWKgTd5kEvqYzE9kCTDSZmaslaxCHk8LeT4gCT2_ADfuargV-6ntLPWV0WNjFP9h9Q', c: 'ADULT' },
+            { n: 'Greek Yogurt Parfait', p: 310, img: 'https://lh3.googleusercontent.com/aida/AP1WRLtBkHsc0WGGkHxg1tNACuXg9NaMWsjhUuroLthcmZd6_8jU4YzI6chHyRZaC1zI8eKd0ulwJHwgZSYfvvtXnhosnr9HPTCwlDMkhpQZ89vLd57Y3elur4Wlvopnm7j1ioodkxq3iQxu7djSj4lfhpBamWNN1GwL1U5EhZL5oVdzpT2GnKewygkAyq8_HHSnViFD4aRRUcckiRWvDSE8-xlSuP5cTxt4gxMYFYctCSrdUMq-N8EAj2Y2bVA', c: 'HEALTHY' },
+            { n: 'Mixed Berry Smoothie', p: 280, img: 'https://lh3.googleusercontent.com/aida/AP1WRLv15DZDOLV6wh8e23vGHb05AY9oXaPEccqyXfdC8YaBz4d7KgrMcur7ll0mrfNEWDAgmph3COQFz_0IXx_Re1mmyPrcB2wGitvHYe_YnoA9DDXYapLoKsUrvpwLWz31osgTsY2pJcVDHCqSXG4c8-UnXIp8zn9D6LJ6tfDhNlX04QHsdZgW4V9Q63QcbeFCciPRqrqmvmpyCck_xMZbBWivLGNzHZL9gVR4cqEKGjrVEqoLvRtH6JJcjtw', c: 'HEALTHY' },
+            { n: 'Signature Cold Coffee', p: 350, img: 'https://lh3.googleusercontent.com/aida/AP1WRLuYn5u_18KcCNxz99muJ5_9KNuV66escS2nNGYLamy86XQWkMBxW6eVuszaby8cNKpsI-5rhr389q098ilvytf_-sYO_jbNdRRPfLUF_FhRAMSYVuhK99J3sENqrajMKmzK-Se0AjNuhggCBfrEq3Sj1SKteARW3lBEuZkGE8HUZ1GdeGvodtvYpcL3SqvO-TgG-Te1rCzRnn-R-nCMOkGL3Cx748rGR2L_xQzXjBHOYV74U7QBflHQ3to', c: 'ADULT' },
+            { n: 'Cheese Dip Trio', p: 150, img: 'https://lh3.googleusercontent.com/aida/AP1WRLtvleYrWdBfJa84nezYMImdjmZtUVkYvh1AjmkDI0tsxPni1RJcOARotIHSiP1QvntXrYtUgndPbjlbiIw-n8gHVTd4Q5VHt8YH4RizQ03zRgUj5TRh2zLSxZbVCSwX3RxGLphSit1xIBr2AQ-0pw6yWOHrnMSLMD3p9sKpGlHHjQ1wtxlN6vFUbplknnjeTAWb4aOoBpRhwV6ysJS-lgXr7ST9wHl6YcGhWqPVFYfU_X1nAp4QT__MDw', c: 'ALL' },
+            { n: 'Hummus & Pita', p: 320, img: 'https://lh3.googleusercontent.com/aida/AP1WRLu7QYSUlJFvp6H2Pd41Dvb5hEObc5m-xViAFOxFvBfOO-42IWcA3QYl3WhVKDXbSH1GqPd_E5Iqgb-INQTotRpUSau16jaSwMX1VnhcHIGwireHeopKeRaua9YL0va2txskJee-GSSRFC2W2MZytJRrhlHt1FPjZB7XZ0HKK9mpI4gRXWqR6n_pBBMerDSDT0455MXzBkxZg6UXiWzy8I8y-zq5-edcI7HF380sTBji2Jx1obQbDGM8aQA', c: 'HEALTHY' }
+        ];
+        let cartCount = 0;
+        const grid = document.getElementById('grid'), badge = document.getElementById('cart-badge');
+        
+        function render(cat = 'ALL') {
+            grid.innerHTML = items.filter(i => cat === 'ALL' || i.c === cat).map(i => `
+                <div class="glass-card rounded-xl overflow-hidden group hover:border-primary-container transition-all">
+                    <div class="h-40 relative bg-surface-container-low overflow-hidden">
+                        <img src="${i.img}" class="w-full h-full object-cover transition-transform group-hover:scale-110">
+                        <div class="absolute top-2 right-2 px-2 py-1 bg-black/60 rounded text-[10px] font-label-caps text-white">${i.c}</div>
+                    </div>
+                    <div class="p-4 flex flex-col justify-between h-32">
+                        <h3 class="text-sm font-semibold">${i.n}</h3>
+                        <div class="flex justify-between items-center mt-auto">
+                            <span class="text-primary-container font-bold">₹ ${i.p}</span>
+                            <button onclick="updateCart()" class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-110 active:scale-90">
+                                <span class="material-symbols-outlined text-sm">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>`).join('');
+        }
+
+
+        window.updateCart = () => badge.innerText = ++cartCount;
+        
+        document.getElementById('filters').addEventListener('click', e => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            document.querySelectorAll('#filters button').forEach(b => b.classList.remove('active-chip'));
+            btn.classList.add('active-chip');
+            render(btn.dataset.cat);
+        });
+
+
+        render();
+    </script>
+</body></html>

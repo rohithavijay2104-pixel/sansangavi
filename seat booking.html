@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CINEPLEX - IMAX Seat Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffb4aa", "primary-container": "#e50914", "on-primary-container": "#fff7f6",
+                        "background": "#121414", "surface-container": "#1e2020", "surface-container-high": "#282a2b",
+                        "surface-container-lowest": "#0c0f0f", "on-surface": "#e2e2e2", "on-surface-variant": "#e9bcb6",
+                        "outline": "#af8782", "outline-variant": "#5e3f3b", "secondary-fixed": "#ffe16d"
+                    },
+                    spacing: { "lg": "24px", "xl": "48px", "md": "16px", "margin-mobile": "16px", "margin-desktop": "80px" },
+                    fontFamily: { "display-lg": ["Montserrat"], "headline-lg": ["Montserrat"], "body-lg": ["Inter"], "label-caps": ["JetBrains Mono"] }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .screen-glow { box-shadow: 0 -20px 60px -10px rgba(229, 9, 20, 0.4); }
+        .glass { backdrop-filter: blur(20px); background: rgba(30, 32, 32, 0.8); }
+        .seat-btn.selected { background-color: #e50914; border-color: #e50914; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen">
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4">
+<div class="flex items-center gap-4">
+<button onclick="window.history.back()"><span class="material-symbols-outlined">arrow_back</span></button>
+<h1 class="font-display-lg text-2xl md:text-3xl tracking-tighter text-primary">CINEPLEX</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center font-label-caps text-xs">
+<span class="text-primary border-b-2 border-primary">Movies</span>
+<span class="text-on-surface-variant hover:text-on-surface cursor-pointer">Food</span>
+<span class="text-on-surface-variant hover:text-on-surface cursor-pointer">Admin</span>
+</div>
+<span class="material-symbols-outlined text-primary scale-125">account_circle</span>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<section class="lg:col-span-8 flex flex-col items-center">
+<div class="w-full mb-12">
+<div class="h-1.5 w-4/5 mx-auto bg-primary-container rounded-full screen-glow"></div>
+<p class="text-center font-label-caps text-[10px] tracking-[0.5em] text-on-surface-variant/40 mt-4 uppercase">IMAX Laser Screen</p>
+</div>
+<div class="grid gap-4 w-full overflow-x-auto pb-4 no-scrollbar">
+<script>
+                const layout = [
+                    { label: 'VIP (₹190)', rows: 2, seats: 12 },
+                    { label: 'BALCONY', rows: 3, seats: 16 },
+                    { label: '1ST CLASS', rows: 4, seats: 18 },
+                    { label: '2ND CLASS', rows: 3, seats: 18 },
+                    { label: '3RD CLASS', rows: 2, seats: 18 }
+                ];
+                document.write(layout.map(tier => `
+                    <div class="flex flex-col gap-2 items-center">
+                        <span class="font-label-caps text-[9px] opacity-40 uppercase">${tier.label}</span>
+                        ${Array(tier.rows).fill().map(() => `
+                            <div class="flex gap-1.5">
+                                ${Array(tier.seats).fill().map((_, i) => `
+                                    <button onclick="this.classList.toggle('selected')" class="seat-btn w-5 h-5 md:w-6 md:h-6 rounded-t-md border border-outline-variant hover:border-primary transition-all ${i === tier.seats/2 - 1 ? 'mr-4' : ''}"></button>
+                                `).join('')}
+                            </div>
+                        `).join('')}
+                    </div>
+                `).join(''));
+            </script>
+</div>
+<div class="mt-8 flex gap-6 font-label-caps text-[10px] opacity-60">
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded-sm border border-outline-variant"></div>Available</div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded-sm bg-primary-container"></div>Selected</div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 rounded-sm bg-surface-container-high opacity-30"></div>Occupied</div>
+</div>
+</section>
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<div class="glass p-6 rounded-2xl border border-white/5 shadow-2xl">
+<h2 class="font-display-lg text-xl text-primary mb-1">Stranger Things: IMAX</h2>
+<p class="text-on-surface-variant text-sm mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-sm">schedule</span> 07:45 PM • SCREEN 01</p>
+<div class="flex gap-2 p-1 bg-surface-container-lowest rounded-xl mb-6">
+<button class="flex-1 py-2 rounded-lg text-[10px] font-label-caps transition-all bg-primary-container text-white" id="btn-ac" onclick="setMode('ac')">AC SCREEN</button>
+<button class="flex-1 py-2 rounded-lg text-[10px] font-label-caps text-on-surface-variant transition-all" id="btn-nonac" onclick="setMode('nonac')">NON-AC SCREEN</button>
+</div>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between items-center">
+<div><p class="font-label-caps text-xs">ADULTS</p><p class="text-[10px] text-on-surface-variant/60" id="adult-price-label">₹190/person</p></div>
+<div class="flex items-center gap-4 bg-surface-container-high px-3 py-1 rounded-full">
+<button class="material-symbols-outlined text-primary text-sm" onclick="updateCount('adults', -1)">remove</button>
+<span class="font-display-lg w-4 text-center" id="adult-count">2</span>
+<button class="material-symbols-outlined text-primary text-sm" onclick="updateCount('adults', 1)">add</button>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<div><p class="font-label-caps text-xs">KIDS (&lt;12)</p><p class="text-[10px] text-on-surface-variant/60" id="kids-price-label">₹130/ticket</p></div>
+<div class="flex items-center gap-4 bg-surface-container-high px-3 py-1 rounded-full">
+<button class="material-symbols-outlined text-primary text-sm" onclick="updateCount('kids', -1)">remove</button>
+<span class="font-display-lg w-4 text-center" id="kids-count">0</span>
+<button class="material-symbols-outlined text-primary text-sm" onclick="updateCount('kids', 1)">add</button>
+</div>
+</div>
+<p class="text-[9px] text-on-surface-variant/40 italic">Note: Kids under 12 do not need a separate seat ticket if lapsing.</p>
+</div>
+<div class="pt-4 border-t border-white/10 mb-6 flex justify-between items-end">
+<span class="text-on-surface-variant text-sm">Total Payable</span>
+<span class="font-display-lg text-2xl text-secondary-fixed" id="total-price">₹380</span>
+</div>
+<button class="w-full bg-primary-container text-white py-4 rounded-xl font-display-lg text-lg hover:brightness-110 active:scale-95 transition-all shadow-[0_10px_30px_-10px_rgba(229,9,20,0.5)]" onclick="location.href='{{DATA:SCREEN:SCREEN_40}}'">Confirm &amp; Proceed</button>
+</div>
+<div class="p-4 rounded-xl bg-secondary-fixed/5 border border-secondary-fixed/20 flex gap-3 items-center" id="offer-box">
+<span class="material-symbols-outlined text-secondary-fixed text-xl">stars</span>
+<p class="text-[11px] text-on-surface-variant leading-tight">Book 6+ seats and get a <b>Large Popcorn</b> for free at the counter!</p>
+</div>
+</aside>
+</main>
+<script>
+    let state = { adults: 2, kids: 0, mode: 'ac' };
+    const prices = { ac: { a: 190, k: 130 }, nonac: { a: 120, k: 80 } };
+
+
+    function setMode(m) {
+        state.mode = m;
+        document.getElementById('btn-ac').className = `flex-1 py-2 rounded-lg text-[10px] font-label-caps transition-all ${m === 'ac' ? 'bg-primary-container text-white' : 'text-on-surface-variant'}`;
+        document.getElementById('btn-nonac').className = `flex-1 py-2 rounded-lg text-[10px] font-label-caps transition-all ${m === 'nonac' ? 'bg-primary-container text-white' : 'text-on-surface-variant'}`;
+        document.getElementById('adult-price-label').innerText = `₹${prices[m].a}/person`;
+        document.getElementById('kids-price-label').innerText = `₹${prices[m].k}/ticket`;
+        calculate();
+    }
+
+
+    function updateCount(type, delta) {
+        const current = Number(document.getElementById(`${type === 'adults' ? 'adult' : 'kids'}-count`).innerText);
+        const next = Math.max(type === 'adults' ? 1 : 0, current + delta);
+        state[type] = next;
+        document.getElementById(`${type === 'adults' ? 'adult' : 'kids'}-count`).innerText = next;
+        calculate();
+    }
+
+
+    function calculate() {
+        const p = prices[state.mode];
+        const aCount = Number(state.adults);
+        const kCount = Number(state.kids);
+        const total = (aCount * p.a) + (kCount * p.k);
+        document.getElementById('total-price').innerText = `₹${total}`;
+    }
+</script>
+</body></html>
